@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>OCR сервис</title>
+    <!-- Bootstrap 5 -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Загрузка изображения для OCR</h2>
+
+    <form class="card p-4 shadow-sm" action="/ocr/" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="file" class="form-label">Выберите изображение:</label>
+            <input class="form-control" type="file" name="file" id="file" accept="image/*" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="lang" class="form-label">Язык распознавания:</label>
+            <select class="form-select" name="lang" id="lang">
+                <option value="rus" selected>Русский</option>
+                <option value="eng">Английский</option>
+                <option value="rus+eng">Русский + Английский</option>
+                <option value="deu">Немецкий</option>
+                <option value="fra">Французский</option>
+                <option value="spa">Испанский</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit">Распознать</button>
+    </form>
+
+    {% if result %}
+    <div class="card mt-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Результат ({{ language }}):</h5>
+            <p class="card-text" style="white-space: pre-wrap;">{{ result }}</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
